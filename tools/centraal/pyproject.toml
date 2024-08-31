@@ -1,0 +1,8 @@
+[project]
+name = "centraal"
+version = "0.0.1"
+dependencies = [
+    "build",
+    "type-utils",
+    "paramiko"
+]

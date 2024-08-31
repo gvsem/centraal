@@ -1,0 +1,3 @@
+./dist
+./src/centraal.egg-info
+./src/master/__pycache__

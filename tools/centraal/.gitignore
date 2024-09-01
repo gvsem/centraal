@@ -1,4 +1,4 @@
 dist
 src/centraal.egg-info
-src/master/__pycache__/*
-src/common/__pycache__/*
+src/centraal/master/__pycache__/*
+src/centraal/common/__pycache__/*

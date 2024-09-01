@@ -1,5 +1,5 @@
 import argparse
-import importlib.util
+import master.init
 
 parser = argparse.ArgumentParser(
     description='Centraal CLI to manage clusters and services.')
@@ -14,9 +14,9 @@ if __name__ == "__main__":
     tool = args.tool
     subtool = args.subtool
 
-    spec = importlib.util.spec_from_file_location(
-        name=tool + '.' + subtool,
-        location='src/' + tool + '/' + subtool + '.py',
-    )
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
+    if tool == 'master' and subtool == 'init':
+        master.init.main()
+        exit(0)
+    else:
+        print('unknown subtool')
+        exit(1)

@@ -6,7 +6,17 @@ dependencies = [
     "type-utils",
     "paramiko"
 ]
-dev-dependencies = [
-    "pylint",
-    "autopep8"
+authors = [
+  { name="gvsem", email="themrgeorgeous@gmail.com" },
 ]
+description = "CLI for managing centraal clusters"
+readme = "README.MD"
+requires-python = ">=3.11"
+
+[project.urls]
+Homepage = "https://github.com/gvsem/centraal"
+Issues = "https://github.com/gvsem/centraal/issues"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"

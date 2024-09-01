@@ -1,3 +1,4 @@
-./dist
-./src/centraal.egg-info
-./src/master/__pycache__
+dist
+src/centraal.egg-info
+src/master/__pycache__/*
+src/common/__pycache__/*

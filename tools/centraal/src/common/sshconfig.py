@@ -38,6 +38,8 @@ class SshConfigManager:
                 'IdentityFile ' +
                 self.get_key_filename_for_host(host) +
                 '\n')
+            f.write('ServerAliveInterval 600\n')
+            f.write('TCPKeepAlive no\n')
             f.write('\n')
 
     def get_keys(self) -> set[str]:

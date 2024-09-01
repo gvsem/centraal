@@ -6,3 +6,7 @@ dependencies = [
     "type-utils",
     "paramiko"
 ]
+dev-dependencies = [
+    "pylint",
+    "autopep8"
+]

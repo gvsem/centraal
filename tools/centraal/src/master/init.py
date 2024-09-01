@@ -6,7 +6,7 @@ import paramiko
 from paramiko.ed25519key import Ed25519Key
 import subprocess
 from common.sshconfig import SshConfigManager
-from common.console import ssh_run_cmds
+from common.sshconsole import ssh_run_cmds
 
 parser = argparse.ArgumentParser(
     description='Zero-day initial centraal master cluster setup.')
@@ -32,9 +32,7 @@ parser.add_argument(
     required=False,
     default=22,
     help='initial ssh port (default: 22)',
-    choices=range(
-        1,
-         65536))
+    choices=range(1, 65536))
 parser.add_argument(
     '--no-passphrase',
     dest='no_passphrase',
@@ -58,16 +56,16 @@ hostname = user + '@' + host + ':' + str(port)
 private_key_file = None
 ssh_key_password = None
 
-if args.private_key_file is not None and not os.path.isfile(
-        args.private_key_file):
-    print('ssh private key does not exist: ' +
-          private_key_file, file=sys.stderr)
-    sys.exit(1)
-
-ssh_config_manager = SshConfigManager()
-
-if args.private_key_file is None:
+if args.private_key_file is not None:
+    private_key_file = args.private_key_file
+    if not os.path.isfile(private_key_file):
+        print('ssh private key does not exist: ' +
+              private_key_file, file=sys.stderr)
+        sys.exit(1)
+else:
+    ssh_config_manager = SshConfigManager()
     private_key_file = ssh_config_manager.get_key_filename_for_host(host)
+
     if host not in ssh_config_manager.get_keys():
         print('Generating new ssh key pair for ' + host)
         if not args.no_passphrase:
@@ -78,15 +76,12 @@ if args.private_key_file is None:
         subprocess.run(['ssh-copy-id', '-i', private_key_file, '-p', str(port),
                         user + '@' + host])
 
-
-client = paramiko.client.SSHClient()
-client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-
 if ssh_key_password is None and not args.no_passphrase:
     ssh_key_password = getpass.getpass(
         prompt='Enter password to decrypt ssh key for ' + host)
 
-print(private_key_file)
+client = paramiko.client.SSHClient()
+client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
 client.connect(host,
                username=user,

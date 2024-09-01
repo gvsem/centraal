@@ -3,10 +3,10 @@ import getpass
 import os.path
 import sys
 import paramiko
-from paramiko.ecdsakey import ECDSAKey
 from paramiko.ed25519key import Ed25519Key
 import subprocess
 from common.sshconfig import SshConfigManager
+from common.console import ssh_run_cmds
 
 parser = argparse.ArgumentParser(
     description='Zero-day initial centraal master cluster setup.')
@@ -68,6 +68,13 @@ client.connect(host,
                    private_key_file, ssh_key_password),
                port=port)
 
-# _stdin, _stdout, _stderr = client.exec_command("df")
-# print(_stdout.read().decode())
+ssh_run_cmds(client, [
+    'id -u centraal &>/dev/null || adduser centraal --disabled-password --gecos ""',
+    'usermod -aG sudo centraal',
+    'mkdir -p /home/centraal/.ssh',
+    'cp ~/.ssh/authorized_keys /home/centraal/.ssh/authorized_keys',
+    'echo -e "ChallengeResponseAuthentication no \nPasswordAuthentication no \nUsePAM no \nPermitRootLogin no" > /etc/ssh/sshd_config.d/disable_root_login.conf',
+    'systemctl reload ssh'
+])
+
 client.close()

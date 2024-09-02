@@ -1,0 +1,21 @@
+name: Tools CLI Lint
+
+on:
+    push:
+        paths:
+            - tools/centraal/**
+    pull_request:
+        branches:
+            - master
+            - develop
+        paths:
+            - tools/centraal/**
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: psf/black@stable
+        with:
+            src: "./tools/centraal"

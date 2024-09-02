@@ -1,0 +1,12 @@
+.DS_Store
+
+# tools
+
+tools/**/bin
+tools/**/include
+tools/**/lib
+tools/**/dist
+tools/**/build
+tools/**/*.egg-info
+tools/**/pyvenv.cfg
+tools/**/__pycache__

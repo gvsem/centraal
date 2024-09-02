@@ -1,4 +1,3 @@
-
 def ssh_run_cmds(client, cmds):
     """
     Run sequence of commands using ssh client and print its output

@@ -2,11 +2,10 @@ import argparse
 import master.init
 
 parser = argparse.ArgumentParser(
-    description='Centraal CLI to manage clusters and services.')
-parser.add_argument('tool', choices=[
-    'master'
-])
-parser.add_argument('subtool')
+    description="Centraal CLI to manage clusters and services."
+)
+parser.add_argument("tool", choices=["master"])
+parser.add_argument("subtool")
 
 if __name__ == "__main__":
 
@@ -14,9 +13,9 @@ if __name__ == "__main__":
     tool = args.tool
     subtool = args.subtool
 
-    if tool == 'master' and subtool == 'init':
+    if tool == "master" and subtool == "init":
         master.init.main()
         exit(0)
     else:
-        print('unknown subtool')
+        print("unknown subtool")
         exit(1)

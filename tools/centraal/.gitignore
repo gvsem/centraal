@@ -1,4 +1,0 @@
-dist
-src/centraal.egg-info
-src/centraal/master/__pycache__/*
-src/centraal/common/__pycache__/*

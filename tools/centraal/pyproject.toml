@@ -1,22 +1,19 @@
-[project]
+[tool.poetry]
 name = "centraal"
-version = "0.0.1"
-dependencies = [
-    "build",
-    "type-utils",
-    "paramiko"
-]
-authors = [
-  { name="gvsem", email="themrgeorgeous@gmail.com" },
-]
+version = "0.1.0"
 description = "CLI for managing centraal clusters"
-readme = "README.MD"
-requires-python = ">=3.11"
+authors = ["Georgii Semenov <themrgeorgeous@gmail.com>"]
+readme = "README.md"
 
-[project.urls]
-Homepage = "https://github.com/gvsem/centraal"
-Issues = "https://github.com/gvsem/centraal/issues"
+[tool.poetry.dependencies]
+python = "^3.11"
+paramiko = "^3.4.1"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.8.0"
+pre-commit = "^3.8.0"
 
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

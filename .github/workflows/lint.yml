@@ -1,9 +1,6 @@
 name: Tools CLI Lint
 
 on:
-    push:
-        paths:
-            - tools/centraal/**
     pull_request:
         branches:
             - master
